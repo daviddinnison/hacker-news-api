@@ -3,19 +3,35 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 
 const { DATABASE, PORT } = require('./config');
 
 const app = express();
 
+const {HackerBlog} = require('./models');
+
 app.use(morgan(':method :url :res[location] :status'));
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get('/api/stories', (req, res) => {
   res.send('hello world');
 });
 // ADD ENDPOINTS HERE
+app.post('/api/stories', jsonParser, (req, res) => {
+  const requiredFields = ['title', 'url'];
+  for (let i=0; i<requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!field in req) {
+      let message = `Missing \$(field)\ in request body`
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+  const item = HackerBlog.create(req.body.title, req.body.url);
+  res.status(201).json(item);
+});
 
 let server;
 let knex;
