@@ -21,7 +21,7 @@ const HackerBlog = {
     delete this.items[id];
   },
   update: function(updatedItem) {
-    console.log(`Deleting story item \`${updatedItem.id}\``);
+    console.log(`Voting for item \`${updatedItem.id}\``);
     const {id} = updatedItem;
     if (!(id in this.items)) {
       throw StorageException(
