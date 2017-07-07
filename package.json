@@ -4,9 +4,8 @@
   "description": "hacker-news-api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/.bin/supervisor app",
-    "test": "node_modules/.bin/mocha -w"
+    "test": "node_modules/.bin/mocha -w",
+    "start": "node_modules/.bin/supervisor app"
   },
   "author": "",
   "license": "ISC",
