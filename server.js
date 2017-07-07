@@ -67,7 +67,7 @@ app.put('/api/stories/:id', jsonParser, (req, res) => {
 
 //work on this
   knex('news')
-  .where('id', '=', req.params.id)
+  .where('id', req.params.id)
   .increment('votes', 1)
   res.status(204).end();
 })
